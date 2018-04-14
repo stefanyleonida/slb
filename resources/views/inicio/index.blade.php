@@ -5,8 +5,10 @@
 @section('content')
 
     <div class="row">
-        <div class='col-md-6 ml-auto mr-auto' style="margin-top: 250px;">
-            <div class="text-center"> <h2 class="titulo"> SLB </h2> </div>
+        <div class='col-md-6 ml-auto mr-auto' style="margin-top: 150px;">
+            <div class="text-center">
+              <img src="{{ asset('img/logo_slb2.jpg') }}" alt="" width="300px">
+            </div>
             <form class="" type="post" action="" id="form_buscar">
                 @csrf
                 <input class="form-control" type="text" name="termo_busca" id="busca" max-lenght="100">

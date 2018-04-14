@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<br><br><br>
+
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8" >
-            <div class="card">
+        <div class="col-md-6" >
+            <!-- div do painel login -->
+            <div class="card shadow" style="margin-top:20%;">
                 <div class="card-header bg-primary" style="color:white;"> {{ __('Login') }}</div>
 
                 <div class="card-body">
@@ -44,7 +45,7 @@
                             <div class="col-md-6 offset-md-4">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }}
+                                        <!-- <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }} -->
                                     </label>
                                 </div>
                             </div>
