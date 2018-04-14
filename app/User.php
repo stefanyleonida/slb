@@ -14,8 +14,10 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'cpf', 'id_tipo_usuario', 'id_biblioteca'
     ];
 
     /**
@@ -23,6 +25,7 @@ class User extends Authenticatable
      *
      * @var array
      */
+    // proteger senha de visualização
     protected $hidden = [
         'password', 'remember_token',
     ];

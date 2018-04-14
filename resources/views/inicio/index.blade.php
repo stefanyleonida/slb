@@ -6,7 +6,7 @@
 
     <div class="row">
         <div class='col-md-6 ml-auto mr-auto' style="margin-top: 250px;">
-            <div class="text-center"> <h2 class="titulo"> Texto </h2> </div>
+            <div class="text-center"> <h2 class="titulo"> SLB </h2> </div>
             <form class="" type="post" action="" id="form_buscar">
                 @csrf
                 <input class="form-control" type="text" name="termo_busca" id="busca" max-lenght="100">
