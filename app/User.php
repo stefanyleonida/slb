@@ -29,4 +29,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getTipo()
+    {
+
+      return $this->hasOne(Models\TipoDeUsuario::class, 'id_tipo_usuario', 'id_tipo_usuario');
+    }
 }

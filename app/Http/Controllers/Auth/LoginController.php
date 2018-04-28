@@ -9,12 +9,11 @@ class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
+  Controlador De Login»»
+  --------------------------------------------------------------------------»
+  controlador lida com diferenças Este autenticação usuários para a aplicação e lhes»
+   redirecionar sua tela home usos do controlador. um traço pagaria para convenientemente
+   sua funcionalidade para fornecer seus aplicativos.
     |
     */
 
@@ -25,7 +24,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/bibliotecas/lista';
 
     /**
      * Create a new controller instance.

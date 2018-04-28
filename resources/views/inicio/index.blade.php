@@ -7,7 +7,7 @@
     <div class="row">
         <div class='col-md-6 ml-auto mr-auto' style="margin-top: 150px;">
             <div class="text-center">
-              <img src="{{ asset('img/logo_slb2.jpg') }}" alt="" width="300px">
+              <img src="{{ asset('img/logo_slb2.jpg') }}" alt="" width="300px" style="margin-bottom:10px;">
             </div>
             <form class="" type="post" action="" id="form_buscar">
                 @csrf

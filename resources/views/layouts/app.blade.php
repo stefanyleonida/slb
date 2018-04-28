@@ -11,6 +11,7 @@
         {{--  script  --}}
         <script src="{{ asset('js/jquery.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
+        <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
     </head>
     <body>
 
@@ -41,6 +42,8 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+                                    <button class="dropdown-item" data-toggle="modal" data-target="#modal_senha">Alterar Senha</button>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -58,9 +61,92 @@
             </div>
         </nav>
 
-        <div class="container">
-            @yield('content')
+        <div class="container-fluid">
+          <div class="row">
+            <!-- menu lateral -->
+            <div class="{{ !Auth::user() ? 'col-xs-0' : 'col-md-2' }}">
+              <!-- se não logado -->
+              @guest
+
+              <!-- se logado -->
+              @else
+                <div class="card shadow" style="margin-top: 10px;">
+                  <div class="card-header text-center bg-primary text-light">
+                    <strong>{{ Auth::user()->getTipo->tipo_usuario }}</strong>
+                  </div>
+                  <div class="card-body">
+                    <!-- se admin --><!--Menu lateral-->
+                    @if(Auth::user()->id_tipo_usuario == 1)
+                    <a href="{{ route('bibliotecas.listar') }}" class="btn btn-info btn-block">Bibliotecas</a>
+                    <a href="{{ route('livros.listar') }}" class="btn btn-info btn-block">Livros</a>
+                    <a href="#" class="btn btn-info btn-block">Usuários</a>
+                    <a href="#" class="btn btn-info btn-block">Reltórios</a>
+
+                    <!-- se bibliotecário -->
+                    @elseif(Auth::user()->id_tipo_usuario == 2)
+                    <a href="#" class="btn btn-info btn-block">Biblioteca</a>
+                    <a href="#" class="btn btn-info btn-block">Livros</a>
+                    <a href="#" class="btn btn-info btn-block">Usuários</a>
+
+                    @endif
+                  </div>
+                </div>
+
+              @endguest
+
+            </div>
+
+            <!-- conteúdo -->
+            <div class="{{ !Auth::user() ? 'col-md-12' : 'col-md-10' }}" style="margin-top:10px;">
+              @yield('content')
+            </div>
+          </div>
         </div>
 
+        <!-- The Modal de Alterar Senha -->
+        <div class="modal fade" id="modal_senha">
+          <div class="modal-dialog">
+            <div class="modal-content">
+
+              <!-- Modal Header -->
+              <div class="modal-header">
+                <h4 class="modal-title">Alterar Senha</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+              </div>
+
+              <!-- Modal body -->
+              <div class="modal-body">
+                <form class="" action="" method="post">
+                  <div class="form-group">
+  <label for="novaSenha">Nova Senha:</label>
+  <input type="text" class="form-control col-md-9" id="novaSenha" placeholder="Digita Nova Senha">
+</div>
+<div class="form-group">
+  <label for="configSenha">Confirmar Senha:</label>
+  <input type="text" class="form-control col-md-9" id="configSenha" placeholder="Digite Novamente Senha">
+</div>
+
+                </form>
+              </div>
+
+              <!-- Modal footer -->
+              <div class="modal-footer">
+                <button type="button" name="button" class="btn btn-primary">Alterar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        @if(session('alerta'))
+        <script type="text/javascript">
+          swal({
+            type : "{{ session('alerta')['tipo'] }}",
+            text: "{{ session('alerta')['texto'] }}",
+          });
+        </script>
+        @endif
+        @stack('script')
     </body>
 </html>

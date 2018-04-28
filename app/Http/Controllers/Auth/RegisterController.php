@@ -11,14 +11,11 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 class RegisterController extends Controller
 {
     /*
-    |--------------------------------------------------------------------------
-    | Register Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users as well as their
-    | validation and creation. By default this controller uses a trait to
-    | provide this functionality without requiring any additional code.
-    |
+    Registo--------------------------------------------------------------------------»»
+    Controlador De»»»
+    --------------------------------------------------------------------------
+    controlador de lida com a Este registo dos novos usuários, bem como a sua criação» validação e.
+     Por padrão controlador usa um esta característica a funcionalidade de» fornecer esta sem exigir qualquer código adicionais.»
     */
 
     use RegistersUsers;
