@@ -8,10 +8,14 @@
         {{--  css  --}}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" >
         <link rel="stylesheet" href="{{ asset('css/style.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/datatables.min.css') }}" >
         {{--  script  --}}
         <script src="{{ asset('js/jquery.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script src="{{ asset('js/sweetalert2.all.min.js') }}"></script>
+        <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+        <script src="{{ asset('js/datatables.min.js') }}"></script>
+        <script src="{{ asset('js/global.js') }}"></script>
     </head>
     <body>
 
@@ -118,14 +122,13 @@
               <div class="modal-body">
                 <form class="" action="" method="post">
                   <div class="form-group">
-  <label for="novaSenha">Nova Senha:</label>
-  <input type="text" class="form-control col-md-9" id="novaSenha" placeholder="Digita Nova Senha">
-</div>
-<div class="form-group">
-  <label for="configSenha">Confirmar Senha:</label>
-  <input type="text" class="form-control col-md-9" id="configSenha" placeholder="Digite Novamente Senha">
-</div>
-
+                    <label for="novaSenha">Nova Senha:</label>
+                    <input type="text" class="form-control col-md-9" id="novaSenha" placeholder="Digita Nova Senha">
+                  </div>
+                  <div class="form-group">
+                    <label for="configSenha">Confirmar Senha:</label>
+                    <input type="text" class="form-control col-md-9" id="configSenha" placeholder="Digite Novamente Senha">
+                  </div>
                 </form>
               </div>
 

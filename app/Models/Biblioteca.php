@@ -6,12 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Biblioteca extends Model
 {
+    //indica para a classe o nome da tabela no banco
     protected $table = 'bibliotecas';
+
+    //indica para a classe o nome da chave primária no banco
     protected $primaryKey = 'id_biblioteca';
 
+    //define os nomes das colunas que serão adicionadas ou editadas nos métodos save() e update()
     protected $fillable = ['nome_biblioteca','endereco','cep','telefone','instituicao','id_cidade', 'status'];
 
-    // busca cidade relacionada a biblioteca relacionamento de 1 para 1
+    //busca cidade relacionada a biblioteca relacionamento de 1 para 1
     public function cidade()
     {
 

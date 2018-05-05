@@ -25,8 +25,13 @@
         <td>{{$biblioteca->cidade->cidade}}</td>
         <td>{{$biblioteca->status()}}</td>
         <td class="text-center">
-          <a href="{{route('bibliotecas.edicao')}}" class=" btn btn-primary" title="editar" >Editar</a>
-          <a href="{{route('bibliotecas.visualizar')}}" class=" btn btn-info" title="visualizar" >Visualizar</a>
+          <a href="{{route('bibliotecas.edicao', $biblioteca)}}" class=" btn btn-primary btn-sm" title="editar" >Editar</a>
+          <a href="{{route('bibliotecas.visualizar', $biblioteca)}}" class=" btn btn-info btn-sm" title="visualizar" >Visualizar</a>
+          @if($biblioteca->status == 1)
+            <a href="{{ route('bibliotecas.altera_status', $biblioteca) }}" class="btn btn-danger btn-sm">Inativar</a>
+          @else
+            <a href="{{ route('bibliotecas.altera_status', $biblioteca) }}" class="btn btn-success btn-sm" style="width: 63.18px;">Ativar</a>
+          @endif
         </td>
       </tr>
       @endforeach

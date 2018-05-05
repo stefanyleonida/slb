@@ -6,47 +6,34 @@
 
 <div class="col-md-6 " style="margin-left: 10%;">
   <div class="card shadow">
-    <div class="card-header bg-info text-light font-weight-bold">Visualizar Biblioteca</div>
+    <div class="card-header bg-primary text-light font-weight-bold">Visualizar Biblioteca</div>
     <div class="card-body">
-      <table class="table">
+      <table class="table table-condensed">
         <tr>
-          <td> <b>Biblioteca:</b> Nome da Biblioteca </td>
-          <td> <b>CEP:</b> 72000-000 </td>
+          <td colspan="2"> <b>Biblioteca:</b> {{ $biblioteca->nome_biblioteca }} </td>
+        </tr>
+        <tr>
+          <td> <b>CEP:</b> {{ $biblioteca->cep }} </td>
+          <td> <b>Cidade:</b> {{ $biblioteca->cidade->cidade }}</td>
+        </tr>
+        <tr>
+          <td> <b>Telefone:</b> {{ $biblioteca->telefone}}</td>
+          <td> <b>Status:</b> {{ $biblioteca->status()}}</td>
+        </tr>
+        <tr>
+          <td colspan="2"> <b>Endereço:</b> {{ $biblioteca->endereco }}</td>
+        </tr>
+        <tr>
+          <td colspan="2"> <b>Instituição:</b> {{ $biblioteca->instituicao != "" ? $biblioteca->instituicao : 'Não informada' }}</td>
+        </tr>
+        <tr>
+          <td colspan="2"></td>
         </tr>
       </table>
-      <form class="" action="" method="post">
-
-            <div class="form-row">
-                <div class="form-group col-md-12" >
-                  <label class="font-weight-bold" for="biblioteca">Biblioteca:</label>
-                </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                  <label class="font-weight-bold" for="cep">CEP:</label>
-                </div>
-                <div class="form-group col-md-4">
-                  <label class="font-weight-bold" for="instituicao">Cidade:</label>
-                </div>
-                <div class="form-group col-md-12">
-                   <label class="font-weight-bold" for="endereco">Endereço:</label>
-                 </div>
-                     <div class="form-group col-md-6">
-                       <label class="font-weight-bold" for="fone">Telefone:</label>
-                     </div>
-                     <div class="form-group col-md-4">
-                       <label class="font-weight-bold" for="instituicao">Instituição:</label>
-                     </div>
-                 <div class="text-center" >
-              <a href="{{ route('bibliotecas.edicao') }}" class="btn btn-info  bg-primary " id="salvar">Editar</a>
-              <button type="button" class="btn btn-info  back">Voltar</button>
-            </div>
-          </div>
-      </form>
-    </div>
+      <div class="text-center">
+        <a href="{{ route('bibliotecas.edicao', $biblioteca) }}" class="btn btn-primary btn-sm">Editar</a>
+        <button type="button" class="btn btn-info btn-sm voltar">Voltar</button>
+      </div>
   </div>
 </div>
-
-
-
-
 @endsection

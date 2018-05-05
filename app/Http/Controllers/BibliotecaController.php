@@ -8,14 +8,14 @@ use App\Models\Biblioteca;
 
 class BibliotecaController extends Controller
 {
+    //lista todas bibiliotecas na tela lista
     public function listar()
     {
-
+      //carrega a lista de bibiliotecas
       $bibliotecas = Biblioteca::all();
 
       return view('bibliotecas.lista', [
         'lista_bibliotecas' => $bibliotecas,
-
       ]);
     }
 
@@ -23,6 +23,7 @@ class BibliotecaController extends Controller
      public function cadastro()
     {
 
+      //carrega a lista de cidades para view para o select de cidades
       $cidades = Cidade::orderBy('cidade')->get();
 
       return view('bibliotecas.cadastro', [
@@ -30,44 +31,95 @@ class BibliotecaController extends Controller
       ]);
     }
 
-    // função de Cadastrar
+    // função de Cadastrar no banco
     public function cadastrar(Request $request)
     {
-
-      $biblioteca = New Biblioteca([
-        'nome_biblioteca' => $request->nome_biblioteca,
-        'cep' => $request->cep,
-        'id_cidade' => $request->id_cidade,
-        'endereco' => $request->endereco,
-        'telefone' => $request->telefone,
-        'instituicao' => $request->instituicao,
+      //faz a validação dos campos do formulário
+      $request->validate([
+        'nome_biblioteca' => 'required|min:3',
+        'id_cidade' => 'required',
+        'cep' => 'required|min:9',
+        'endereco' => 'required|min:4',
+        'telefone' => 'required|min:14|unique:bibliotecas',
       ]);
 
-      if($biblioteca->save()){
+      //instancia um novo objeto do tipo biblioteca passando como parametros todos os campos via request
+      $biblioteca = New Biblioteca($request->all());
 
+      //se salvar redireciona para a tela de lista de bibiliotecas junto com a mensagem de sucesso
+      if($biblioteca->save()){
         return redirect()
         ->route('bibliotecas.listar')
         ->with('alerta', [
           'tipo' => 'success',
           'texto' => 'Biblioteca salva com sucesso'
         ]);
-      }else{
-        return redirect()
-        ->back()
-        ->with('alerta', [
-          'tipo' => 'error',
-          'texto' => 'Ocorreu um erro, não foi possível salvar.'
-        ]);
       }
 
     }
 
-    public function edicao()
+    //chama a tela de cadastro
+    public function edicao(Biblioteca $biblioteca)
     {
-      return view('bibliotecas.editar');
+      //carrega a lista de cidades para view para o select de cidades
+      $cidades = Cidade::orderBy('cidade')->get();
+
+      return view('bibliotecas.editar', [
+        'lista_cidades' => $cidades,
+        'biblioteca' => $biblioteca,
+      ]);
     }
-    public function visualizar()
+
+    //função de editar no banco de dados
+    public function editar(Request $request, Biblioteca $biblioteca)
     {
-      return view('bibliotecas.visualizar');
+
+      // valida os campos indicados
+      $request->validate([
+        'nome_biblioteca' => 'required|min:3',
+        'id_cidade' => 'required',
+        'cep' => 'required|min:9',
+        'endereco' => 'required|min:4',
+        'telefone' => 'required|min:14',
+      ]);
+
+      //se editar retorna para a tela de lista junto com a mensagem de sucesso.
+      if($biblioteca->update($request->all())){
+        return redirect()
+        ->route('bibliotecas.listar')
+        ->with('alerta',[
+          'tipo' => 'success',
+          'texto' => 'Cadastro alterado com sucesso'
+        ]);
+      }
+    }
+
+    //chama a tela de visualizar detalhes da biblioteca
+    public function visualizar(Biblioteca $biblioteca)
+    {
+      return view('bibliotecas.visualizar', [
+        'biblioteca' => $biblioteca,
+      ]);
+    }
+
+    //altera o status da biblioteca entre ativo e inativo
+    public function alteraStatus(Biblioteca $biblioteca)
+    {
+
+      //se o status atual da biblioteca for 0 altera para 1 se não altera para 0
+      $status = 0;
+      if($biblioteca->status == 0){
+        $status = 1;
+      }
+
+      //se alterar o status retorna a tela de lista de bibliotecas junto com a mensagem de sucesso
+      if($biblioteca->update(['status' => $status])){
+        return redirect()
+        ->back()
+        ->with('alerta', [
+          'tipo' => 'success',
+          'texto' => 'Status alterado com sucesso',
+        ]);
+      }
     }
 }

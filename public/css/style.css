@@ -9,3 +9,8 @@
 .shadow {
   box-shadow: 3px 3px lightgray;
 }
+
+.buttons {
+  margin-top: 20px;
+  margin-left: 20px;
+}
