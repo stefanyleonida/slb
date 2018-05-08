@@ -7,7 +7,7 @@
   <a href="{{route('bibliotecas.cadastro')}}" class="btn btn-primary">Cadastrar Biblioteca</a>
 </div>
 <div class="col-md-12">
-  <h4 class="" style="margin-top: 50px">Lista de Bibliotecas</h4>
+  <center><h4 class="" style="margin-top: 50px">Lista de Bibliotecas</h4></center>
   <div class="row" style="margin-top: 10px;">
     <table class="table table-hover table-bordered table-condensed table-striped dataTable">
     <thead class="bg-info">

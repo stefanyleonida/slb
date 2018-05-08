@@ -106,6 +106,16 @@ class BibliotecaController extends Controller
     public function alteraStatus(Biblioteca $biblioteca)
     {
 
+      // impede de alterar o status da sede
+      if($biblioteca->id_biblioteca == 1){
+        return redirect()
+        ->back()
+        ->with('alerta', [
+          'tipo' => 'info',
+          'texto' => 'Não é permitido alterar o status da Sede SLB'
+        ]);
+      }
+
       //se o status atual da biblioteca for 0 altera para 1 se não altera para 0
       $status = 0;
       if($biblioteca->status == 0){

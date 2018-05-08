@@ -3,7 +3,7 @@
   <label class="col-md-3 text-md-right" for="nome_biblioteca">Biblioteca:</label>
   <div class="col-md-9">
     <input class="form-control" type="text" name="nome_biblioteca" value="{{ old('nome_biblioteca', isset($biblioteca) ? $biblioteca->nome_biblioteca : '') }}"
-    id="nome_biblioteca" maxlength="200" placeholder="Nome da Biblioteca" required autofocus>
+    id="nome_biblioteca" maxlength="200" placeholder="Nome da Biblioteca" required autofocus {{ isset($biblioteca) && $biblioteca->id_biblioteca == 1 ? 'readonly' : '' }}>
     @if($errors->has('nome_biblioteca'))
       <span class="text-danger"> <b>{{$errors->first('nome_biblioteca')}}</b> </span>
     @endif

@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', 'ENTRAR')
+
 @section('content')
 
 <div class="container">
@@ -41,25 +43,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <!-- <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> {{ __('Remember Me') }} -->
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Entrar') }}
                                 </button>
 
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                <button type="button" class="btn btn-link" href="" id="btn_esq_senha" data-toggle="modal" data-target="#modal_esq_senha">
                                     {{ __('Esqueceu a senha?') }}
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </form>
@@ -68,4 +60,48 @@
         </div>
     </div>
 </div>
+<!-- The Modal -->
+<div class="modal" id="modal_esq_senha">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Esqueceu a senha?</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <form class="" action="{{ route('usuarios.recuperar_senha') }}" method="post" id="form_esq_senha">
+          @csrf
+          <div class="form-group row">
+            <label class="col-md-2 text-md-right" for="email2">E-mail:</label>
+            <div class="col-md-10">
+              <input class="form-control" type="text" name="email2" id="email2" value="{{ old('email2') }}" placeholder="Informe seu e-mail" required>
+              @if($errors->has('email2'))
+                <span class="text-danger"> <b>{{ $errors->first('email2') }}</b> </span>
+              @endif
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary btn-sm" form="form_esq_senha" >Enviar</button>
+        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Fechar</button>
+      </div>
+
+    </div>
+  </div>
+</div>
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    @if($errors->has('email2'))
+      $('#btn_esq_senha').click();
+    @endif
+</script>
+@endpush

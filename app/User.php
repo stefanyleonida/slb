@@ -17,7 +17,7 @@ class User extends Authenticatable
 
 
     protected $fillable = [
-        'name', 'email', 'password', 'cpf', 'id_tipo_usuario', 'id_biblioteca'
+        'name', 'email', 'password', 'cpf', 'id_tipo_usuario', 'id_biblioteca', 'status'
     ];
 
     /**
@@ -30,9 +30,28 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    //retorna o tipo de usuário
     public function getTipo()
     {
 
       return $this->hasOne(Models\TipoDeUsuario::class, 'id_tipo_usuario', 'id_tipo_usuario');
+    }
+
+    //retorna a bibloteca vinculada ao usuário
+    public function biblioteca()
+    {
+
+      return $this->hasOne(Models\Biblioteca::class, 'id_biblioteca', 'id_biblioteca');
+    }
+
+    public function status()
+    {
+      $status = 'Ativo';
+
+      if($this->status == 0){
+        $status = 'Inativo';
+      }
+
+      return $status;
     }
 }

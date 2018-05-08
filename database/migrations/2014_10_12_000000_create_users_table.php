@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->integer('id_tipo_usuario');
             $table->integer('id_biblioteca');
+            $table->integer('status')->unsigned()->default(1);
             $table->rememberToken();
             $table->timestamps(); //coluna com data de cadastro e última alteração do cadastro
             // relacionamento com tipo usuário

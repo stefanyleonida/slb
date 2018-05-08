@@ -47,7 +47,7 @@
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
 
-                                    <button class="dropdown-item" data-toggle="modal" data-target="#modal_senha">Alterar Senha</button>
+                                    <button class="dropdown-item" data-toggle="modal" data-target="#modal_senha" id="btn_alterar_senha">Alterar Senha</button>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -83,7 +83,7 @@
                     @if(Auth::user()->id_tipo_usuario == 1)
                     <a href="{{ route('bibliotecas.listar') }}" class="btn btn-info btn-block">Bibliotecas</a>
                     <a href="{{ route('livros.listar') }}" class="btn btn-info btn-block">Livros</a>
-                    <a href="#" class="btn btn-info btn-block">Usuários</a>
+                    <a href="{{ route('usuarios.listar') }}" class="btn btn-info btn-block">Usuários</a>
                     <a href="#" class="btn btn-info btn-block">Reltórios</a>
 
                     <!-- se bibliotecário -->
@@ -120,21 +120,25 @@
 
               <!-- Modal body -->
               <div class="modal-body">
-                <form class="" action="" method="post">
+                <form class="" action="{{ route('usuarios.trocar_senha', Auth::user()) }}" method="post" id="form_trocar_senha">
+                  @csrf
                   <div class="form-group">
-                    <label for="novaSenha">Nova Senha:</label>
-                    <input type="text" class="form-control col-md-9" id="novaSenha" placeholder="Digita Nova Senha">
+                    <label for="senha">Nova Senha:</label>
+                    <input type="password" class="form-control col-md-9" name="senha" id="senha" placeholder="Digite a Nova Senha" required maxlength="16">
+                    @if($errors->has('senha'))
+                      <span class="text-danger"> <b>{{ $errors->first('senha') }}</b> </span>
+                    @endif
                   </div>
                   <div class="form-group">
-                    <label for="configSenha">Confirmar Senha:</label>
-                    <input type="text" class="form-control col-md-9" id="configSenha" placeholder="Digite Novamente Senha">
+                    <label for="confirmacao">Confirmar Senha:</label>
+                    <input type="password" class="form-control col-md-9" name="confirmacao" id="confirmacao" placeholder="Digite Novamente Senha" required maxlength="16">
                   </div>
                 </form>
               </div>
 
               <!-- Modal footer -->
               <div class="modal-footer">
-                <button type="button" name="button" class="btn btn-primary">Alterar</button>
+                <button type="submit" form="form_trocar_senha" name="button" class="btn btn-primary">Alterar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
               </div>
 
@@ -142,14 +146,18 @@
           </div>
         </div>
 
-        @if(session('alerta'))
         <script type="text/javascript">
-          swal({
-            type : "{{ session('alerta')['tipo'] }}",
-            text: "{{ session('alerta')['texto'] }}",
-          });
+          @if(session('alerta'))
+            swal({
+              type : "{{ session('alerta')['tipo'] }}",
+              text: "{{ session('alerta')['texto'] }}",
+            });
+          @endif
+
+          @if($errors->has('senha'))
+            $('#btn_alterar_senha').click();
+          @endif
         </script>
-        @endif
         @stack('script')
     </body>
 </html>
