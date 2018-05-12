@@ -55,15 +55,114 @@ class UserController extends Controller
       ]);
     }
 
+    // retorna tela de cadastro
     public function cadastro()
     {
-
+      // lista bibliotecas para o select
       $bibliotecas = Biblioteca::orderBy('nome_biblioteca')
       ->get();
 
       return view('usuarios.cadastro', [
         'bibliotecas' => $bibliotecas
       ]);
+    }
+
+    public function cadastrar(Request $request)
+    {
+
+      $request->validate([
+        'name' => 'required',
+        'email' => 'required|email|unique:users',
+        'cpf' => 'required|min:14|unique:users',
+        'password' => 'required|min:6|required_with:password_confirmation|same:password_confirmation',
+      ]);
+
+      $usuario = new User([
+        'name' => $request->name,
+        'email' => $request->email,
+        'cpf' => $request->cpf,
+        'password' => bcrypt($request->password),
+        'id_tipo_usuario' => $request->id_tipo_usuario,
+        'id_biblioteca' => $request->id_biblioteca,
+      ]);
+
+      if($usuario->save()){
+          return redirect()
+          ->route('usuarios.listar')
+          ->with('alerta', [
+            'tipo' => 'success',
+            'texto' => 'Usuário cadastrado com sucesso.'
+          ]);
+      }
+
+    }
+
+  public function edicao(User $usuario){
+
+    $bibliotecas = Biblioteca::orderBy('nome_biblioteca')->get();
+
+    return view('usuarios.edicao',[
+      'bibliotecas' => $bibliotecas,
+      'usuario' => $usuario,
+    ]);
+
+  }
+
+    public function validaCpf(int $id, string $cpf)
+    {
+
+      $countCpf = User::where('id', '<>', $id)
+      ->where('cpf', $cpf)->count();
+
+      return $countCpf;
+
+    }
+
+    public function validaEmail(int $id, string $email)
+    {
+
+      $countEmail = User::where('id', '<>', $id)
+      ->where('email', $email)->count();
+
+      return $countEmail;
+
+    }
+
+    public function editar(Request $request, User $usuario)
+    {
+
+      if($this->validaCpf($usuario->id, $request->cpf)){
+        return redirect()
+        ->back()
+        ->with('alerta',[
+          'tipo' => 'info',
+          'texto' => 'O CPF '.$request->cpf.' já foi utilizado por outro usuário',
+        ]);
+      }
+
+      if($this->validaEmail($usuario->id, $request->email)){
+        return redirect()
+        ->back()
+        ->with('alerta',[
+          'tipo' => 'info',
+          'texto' => 'O e-mail '.$request->email.' já foi utilizado por outro usuário',
+        ]);
+      }
+
+      $request->validate([
+        'name' => 'required',
+        'email' => 'required|email',
+        'cpf' => 'required|min:14',
+      ]);
+
+      if($usuario->update($request->all())){
+        return redirect()
+        ->route('usuarios.listar')
+        ->with('alerta', [
+          'tipo' => 'success',
+          'texto' => 'Usuário editado com sucesso',
+        ]);
+      }
     }
 
     // função para alterar status
@@ -96,6 +195,14 @@ class UserController extends Controller
       }
     }
 
+    public function visualizar(User $usuario)
+    {
+
+      return view('usuarios.visualizar',[
+        'usuario' => $usuario,
+      ]);
+    }
+
     public function recuperarSenha(Request $request)
     {
 
@@ -119,4 +226,5 @@ class UserController extends Controller
         $nova_senha = str_random(8);
       }
     }
+
 }

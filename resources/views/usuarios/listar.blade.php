@@ -33,8 +33,8 @@
         <td>{{ $usuario->biblioteca->nome_biblioteca }}</td>
         <td>{{ $usuario->status() }}</td>
         <td class="text-center">
-          <a class="btn btn-primary btn-sm" href="#">Editar</a>
-          <a class="btn btn-info btn-sm" href="#">Visualizar</a>
+          <a class="btn btn-primary btn-sm" href="{{route('usuarios.edicao', $usuario)}}">Editar</a>
+          <a class="btn btn-info btn-sm" href="{{route('usuarios.visualizar', $usuario)}}">Visualizar</a>
           <a class="btn {{ $usuario->status == 1 ? 'btn-danger' : 'btn-success' }} btn-sm" href="{{ route('usuarios.alterar_status', $usuario) }}">{{ $usuario->status == 1 ? 'Inativar' : 'Ativar' }}</a>
         </td>
       </tr>

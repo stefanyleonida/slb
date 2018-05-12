@@ -25,6 +25,12 @@ Route::get('/usuarios/listar', 'UserController@listar')->name('usuarios.listar')
 Route::get('/usuarios/alterar_status/{user}', 'UserController@alterarStatus')->name('usuarios.alterar_status');
 Route::post('/usuarios/recuperar_senha', 'UserController@recuperarSenha')->name('usuarios.recuperar_senha');
 Route::get('/usuarios/cadastro', 'UserController@cadastro')->name('usuarios.cadastro');
+Route::post('/usuarios/cadastrar', 'UserController@cadastrar')->name('usuarios.cadastrar');
+Route::get('/usuarios/edicao/{usuario}', 'UserController@edicao')->name('usuarios.edicao');
+Route::post('/usuarios/editar/{usuario}', 'UserController@editar')->name('usuarios.editar');
+Route::get('/usuarios/visualizar/{usuario}', 'UserController@visualizar')->name('usuarios.visualizar');
+
+
 
 // Rotas de Biblioteca
 Route::get('/bibliotecas/lista', 'BibliotecaController@listar')->name('bibliotecas.listar');
