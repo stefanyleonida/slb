@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Auth;
 use App\User;
+use App\Models\Biblioteca;
 
 class UserController extends Controller
 {
@@ -51,6 +52,17 @@ class UserController extends Controller
 
       return view('usuarios.listar', [
         'usuarios' => $usuarios
+      ]);
+    }
+
+    public function cadastro()
+    {
+
+      $bibliotecas = Biblioteca::orderBy('nome_biblioteca')
+      ->get();
+
+      return view('usuarios.cadastro', [
+        'bibliotecas' => $bibliotecas
       ]);
     }
 

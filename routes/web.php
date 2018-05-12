@@ -24,6 +24,7 @@ Route::post('/usuarios/trocar_senha/{user?}', 'UserController@trocarSenha')->nam
 Route::get('/usuarios/listar', 'UserController@listar')->name('usuarios.listar');
 Route::get('/usuarios/alterar_status/{user}', 'UserController@alterarStatus')->name('usuarios.alterar_status');
 Route::post('/usuarios/recuperar_senha', 'UserController@recuperarSenha')->name('usuarios.recuperar_senha');
+Route::get('/usuarios/cadastro', 'UserController@cadastro')->name('usuarios.cadastro');
 
 // Rotas de Biblioteca
 Route::get('/bibliotecas/lista', 'BibliotecaController@listar')->name('bibliotecas.listar');

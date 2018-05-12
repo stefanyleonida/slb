@@ -5,7 +5,7 @@
 @section('content')
 
 <div class="col-xs-12">
-  <a class="btn btn-primary" href="#">Cadastrar Usuário</a>
+  <a class="btn btn-primary" href="{{ route('usuarios.cadastro') }}">Cadastrar Usuário</a>
 </div>
 
 <div class="col-xs-12 text-center" style="margin-top: 50px">
@@ -14,7 +14,7 @@
 
 <div class="col-xs-12" style="margin-top: 10px;">
   <table class="table table-hover table-bordered table-condensed table-striped dataTable">
-    <thead>
+    <thead class="bg-info text-light">
       <tr>
         <th>Nome</th>
         <th>CPF</th>
