@@ -12,7 +12,7 @@
                 <div class="card-header bg-primary" style="color:white;"> {{ __('Login') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('logar') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -61,7 +61,7 @@
     </div>
 </div>
 <!-- The Modal -->
-<div class="modal" id="modal_esq_senha">
+<div class="modal modal_hide" id="modal_esq_senha">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -73,7 +73,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-        <form class="" action="{{ route('usuarios.recuperar_senha') }}" method="post" id="form_esq_senha">
+        <form class="carregando" action="{{ route('usuarios.recuperar_senha') }}" method="post" id="form_esq_senha">
           @csrf
           <div class="form-group row">
             <label class="col-md-2 text-md-right" for="email2">E-mail:</label>

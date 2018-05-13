@@ -11,7 +11,7 @@
           <td colspan="2"> <b>Nome:</b> {{ $usuario->name }} </td>
         </tr>
         <tr>
-          <td> <b>E-mail:</b> {{ $usuario->email }} </td>
+          <td colspan="2"> <b>E-mail:</b> {{ $usuario->email }} </td>
         </tr>
         <tr>
           <td> <b>CPF:</b> {{ $usuario->cpf }}</td>

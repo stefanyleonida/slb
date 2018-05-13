@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cidade;
 use App\Models\Biblioteca;
+use App\User;
 
 class BibliotecaController extends Controller
 {
@@ -102,17 +103,28 @@ class BibliotecaController extends Controller
       ]);
     }
 
+    // altera status de todos usuários da biblioteca que não são administradores
+    public function alteraStatusUsuario(int $id_biblioteca, $status)
+    {
+
+      $usuarios = User::where('id_biblioteca', $id_biblioteca)
+      ->where('id_tipo_usuario', '<>', 1);
+
+      $usuarios->update(['status' => $status]);
+    }
+
     //altera o status da biblioteca entre ativo e inativo
     public function alteraStatus(Biblioteca $biblioteca)
     {
 
       // impede de alterar o status da sede
       if($biblioteca->id_biblioteca == 1){
+
         return redirect()
         ->back()
         ->with('alerta', [
           'tipo' => 'info',
-          'texto' => 'Não é permitido alterar o status da Sede SLB'
+          'texto' => 'Não é permitido alterar o status desta Biblioteca'
         ]);
       }
 
@@ -124,6 +136,9 @@ class BibliotecaController extends Controller
 
       //se alterar o status retorna a tela de lista de bibliotecas junto com a mensagem de sucesso
       if($biblioteca->update(['status' => $status])){
+
+        $this->alteraStatusUsuario($biblioteca->id_biblioteca, $status);
+
         return redirect()
         ->back()
         ->with('alerta', [

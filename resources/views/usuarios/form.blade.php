@@ -51,26 +51,7 @@
   </div>
 </div>
 
-@if(!isset($usuario))
-<div class="form-group row">
-  <label class="col-md-3 text-md-right" for="password">Senha:</label>
-  <div class="col-md-4">
-    <input class="form-control" type="password" name="password" id="password" value="" maxlength="16" required>
-    @if($errors->has('password'))
-      <span class="text-danger font-weight-bold">{{ $errors->first('password') }}</span>
-    @endif
-  </div>
-</div>
-
-<div class="form-group row">
-  <label class="col-md-3 text-md-right" for="password_confirmation">Confirmação:</label>
-  <div class="col-md-4">
-    <input class="form-control"  type="password" name="password_confirmation" id="password_confirmation" value="">
-  </div>
-</div>
-@endif
-
 <div class="text-center">
-  <button class="btn btn-primary btn-sm" type="submit" id="btn_salvar">Salvar</button>
+  <button class="btn btn-primary btn-sm carregando" type="submit" id="btn_salvar">Salvar</button>
   <button class="btn btn-info btn-sm voltar" type="button">Voltar</button>
 </div>

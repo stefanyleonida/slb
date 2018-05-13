@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Auth;
 use App\User;
 use App\Models\Biblioteca;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RecuperaSenha;
+use App\Mail\UsuarioCriado;
 
 class UserController extends Controller
 {
@@ -74,17 +77,27 @@ class UserController extends Controller
         'name' => 'required',
         'email' => 'required|email|unique:users',
         'cpf' => 'required|min:14|unique:users',
-        'password' => 'required|min:6|required_with:password_confirmation|same:password_confirmation',
       ]);
+
+      $senha = str_random(8);
 
       $usuario = new User([
         'name' => $request->name,
         'email' => $request->email,
         'cpf' => $request->cpf,
-        'password' => bcrypt($request->password),
+        'password' => bcrypt($senha),
         'id_tipo_usuario' => $request->id_tipo_usuario,
         'id_biblioteca' => $request->id_biblioteca,
       ]);
+
+      $dados_usuario = [
+        'nome' => $usuario->name,
+        'login' => $usuario->email,
+        'senha' => $senha,
+      ];
+
+      Mail::to($usuario->email)
+      ->send(new UsuarioCriado($dados_usuario));
 
       if($usuario->save()){
           return redirect()
@@ -206,13 +219,16 @@ class UserController extends Controller
     public function recuperarSenha(Request $request)
     {
 
+      // valida senha obrigatória|tipo email
       $request->validate([
         'email2' => 'required|email',
       ]);
 
-      $user = User::where('email', $request->email2);
+      // busca o usuário cadastrado com o e-mail informado
+      $usuario = User::where('email', $request->email2);
 
-      if($user->count() == 0){
+      // se não for encontrado
+      if($usuario->count() == 0){
         return redirect()
         ->back()
         ->with('alerta', [
@@ -221,9 +237,35 @@ class UserController extends Controller
         ]);
       }
 
-      if($user->count() == 1){
+      // se for encontrado um usuário para esse e-mail
+      if($usuario->count() == 1){
 
+        // cria senha aleatória de 8 caracteres
         $nova_senha = str_random(8);
+
+        $usuario = $usuario->first();
+
+        // crio array com os dados do usuário que serão enviados para o email
+        $dados_usuario = [
+          'nome' => $usuario->name,
+          'login' => $usuario->email,
+          'senha' => $nova_senha,
+        ];
+
+        // envia os dados para o email do usuário
+        Mail::to($usuario->email)
+        ->send(new RecuperaSenha($dados_usuario));
+
+        // faz o update da senha do usuário
+        if($usuario->update(['password' => bcrypt($nova_senha)])){
+
+          return redirect()
+          ->back()
+          ->with('alerta', [
+            'tipo' => 'success',
+            'texto' => 'Uma nova senha foi enviada para o e-mail '.$request->email.', aguarde alguns minutos.',
+          ]);
+        }
       }
     }
 

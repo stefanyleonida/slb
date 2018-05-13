@@ -66,6 +66,12 @@
         </nav>
 
         <div class="container-fluid">
+          <div class="" id="loading">
+            <img src="{{ asset('images/loading.gif') }}" alt="" width="">
+          </div>
+
+          <div class="" id="over_loading">
+          </div>
           <div class="row">
             <!-- menu lateral -->
             <div class="{{ !Auth::user() ? 'col-xs-0' : 'col-md-2' }}">

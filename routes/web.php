@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::post('/logar', 'LogarController@logar')->name('logar');
 
 //Rotas de Usuários
 Route::post('/usuarios/trocar_senha/{user?}', 'UserController@trocarSenha')->name('usuarios.trocar_senha');
