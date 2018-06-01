@@ -56,10 +56,8 @@ class LogarController extends Controller
         $usuario = User::where('email', $request->email)
         ->first();
 
-        $biblioteca = Biblioteca::findOrfail($usuario->id_biblioteca);
-
         return redirect()
-        ->route('bibliotecas.visualizar', $biblioteca);
+        ->route('livros.listar');
       }
     }
 }

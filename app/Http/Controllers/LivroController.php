@@ -8,6 +8,7 @@ use App\Models\Livro;
 use App\Models\Categoria;
 use App\Models\Idioma;
 use App\User;
+use Auth;
 
 
 class LivroController extends Controller
@@ -18,6 +19,11 @@ class LivroController extends Controller
   {
     //carrregar a lista de livros
     $livros = Livro::all();
+
+    if(Auth::user()->id_tipo_usuario == 2){
+      $livros = Livro::where('id_biblioteca', Auth::user()->id_biblioteca)
+      ->get();
+    }
 
      return view('livros.lista',[
       'livros' => $livros,

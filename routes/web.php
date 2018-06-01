@@ -50,3 +50,6 @@ Route::get('/livros/edicao/{livro}', 'LivroController@edicao')->name('livros.edi
 Route::post('/livros/editar/{livro}', 'LivroController@editar')->name('livros.editar');
 Route::get('/livros/excluir/{id}', 'LivroController@excluir')->name('livros.excluir');
 Route::get('/livros/visualizar/{livro}', 'LivroController@visualizar')->name('livros.visualizar');
+
+//Rotas de Pesquisa
+Route::get('/pesquisa', 'PesquisaController@pesquisar')->name('pesquisar');

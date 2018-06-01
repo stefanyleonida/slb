@@ -46,7 +46,7 @@
                                 </a>
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-
+                                    <a href="{{ route('usuarios.edicao', Auth::user()) }}" class="dropdown-item" >Meu Cadastro</a>
                                     <button class="dropdown-item" data-toggle="modal" data-target="#modal_senha" id="btn_alterar_senha">Alterar Senha</button>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
@@ -94,7 +94,7 @@
 
                     <!-- se bibliotecário -->
                     @elseif(Auth::user()->id_tipo_usuario == 2)
-                    <a href="#" class="btn btn-info btn-block">Biblioteca</a>
+                    <a href="{{ route('bibliotecas.visualizar', Auth::user()->id_biblioteca) }}" class="btn btn-info btn-block">Biblioteca</a>
                     <a href="{{ route('livros.listar') }}" class="btn btn-info btn-block">Livros</a>
                     <a href="#" class="btn btn-info btn-block">Usuários</a>
 

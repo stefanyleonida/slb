@@ -27,7 +27,14 @@
           <td colspan="2"> <b>Categoria:</b> {{ $livro->getCategoria != null ? $livro->getCategoria->categoria : 'Não Informado.' }}</td>
         </tr>
         <tr>
-          <td colspan="2"></td>
+          <td> <b>Biblioteca:</b>
+            {{ $livro->getBiblioteca->nome_biblioteca }}
+          </td>
+          <td>
+            <div class="text-right">
+              <a href="{{ route('bibliotecas.visualizar', $livro->getBiblioteca) }}" class="btn btn-link">Visualizar Biblioteca</a>
+            </div>
+          </td>
         </tr>
       </table>
 

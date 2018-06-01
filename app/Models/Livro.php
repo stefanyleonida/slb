@@ -27,4 +27,9 @@ class Livro extends Model
       return  $this->hasOne(Categoria::class, 'id_categoria', 'id_categoria');
     }
 
+    public function getBiblioteca()
+    {
+      return $this->hasOne(Biblioteca::class, 'id_biblioteca', 'id_biblioteca');
+    }
+
 }

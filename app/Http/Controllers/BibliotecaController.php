@@ -138,7 +138,10 @@ class BibliotecaController extends Controller
       //se alterar o status retorna a tela de lista de bibliotecas junto com a mensagem de sucesso
       if($biblioteca->update(['status' => $status])){
 
-        $this->alteraStatusUsuario($biblioteca->id_biblioteca, $status);
+        //se inativar a biblioteca inativa todos os usuários
+        if($status == 0){
+            $this->alteraStatusUsuario($biblioteca->id_biblioteca, $status);
+        }
 
         return redirect()
         ->back()

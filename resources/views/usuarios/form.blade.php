@@ -3,7 +3,7 @@
 <div class="form-group row">
   <label class="col-md-3 text-md-right" for="biblioteca">Biblioteca:</label>
   <div class="col-md-8">
-    <select class="form-control" name="id_biblioteca" id="biblioteca" required autofocus>
+    <select class="form-control" name="id_biblioteca" id="biblioteca" required {{ Auth::user()->id_tipo_usuario == 2 ? 'disabled' : 'autofocus' }}>
       <option value="">Selecione a Biblioteca</option>
       @if(isset($bibliotecas))
         @foreach($bibliotecas as $biblioteca)
@@ -17,8 +17,14 @@
 
 <div class="col-md-12">
   <label class="col-md-3">Tipo de Usuário:</label>
-  <label class="radio-inline"> <input type="radio" name="id_tipo_usuario" value="2" checked> Bibliotecário</label> &nbsp;
-  <label class="radio-inline"> <input type="radio" name="id_tipo_usuario" value="1" {{ (old('id_tipo_usuario') == 1) || (isset($usuario) && $usuario->id_tipo_usuario == 1) ? 'checked' : '' }}> Administrador</label>
+  <label class="radio-inline"> <input type="radio" name="id_tipo_usuario" value="2" checked {{ Auth::user()->id_tipo_usuario == 2 ? 'disabled' : '' }}>
+    Bibliotecário
+  </label> &nbsp;
+  <label class="radio-inline"> <input type="radio" name="id_tipo_usuario" value="1"
+    {{ (old('id_tipo_usuario') == 1) || (isset($usuario) && $usuario->id_tipo_usuario == 1) ? 'checked' : '' }}
+    {{ Auth::user()->id_tipo_usuario == 2 ? 'disabled' : '' }}> 
+    Administrador
+  </label>
 </div>
 
 <div class="form-group row">

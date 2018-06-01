@@ -8,6 +8,7 @@
 </div>
 <div class="col-md-12">
   <h4 class="" style="margin-top: 50px">Lista de Livros</h4>
+</div>
   <div class="row" style="margin-top: 10px;">
     <table class="table table-hover table-bordered table-condensed table-striped dataTable">
     <thead class="bg-info">
