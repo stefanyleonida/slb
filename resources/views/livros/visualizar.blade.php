@@ -1,10 +1,10 @@
-@extends('layouts.php')
+@extends('layouts.app')
 
 @section('title','VISUALIZAR LIVRO')
 
 @section('content')
 
-<div class="col-md-6 " style="margin-left: 10%;">
+<div class="col-md-6 mx-auto">
   <div class="card shadow">
     <div class="card-header bg-primary text-light font-weight-bold">Visualizar Livro</div>
     <div class="card-body">
@@ -18,15 +18,13 @@
         </tr>
         <tr>
           <td> <b>Editora:</b> {{ $livro->editora}}</td>
-        </tr>
-        <tr>
           <td> <b>ISBN:</b> {{ $livro->isbn}}</td>
         </tr>
         <tr>
-          <td colspan="2"> <b>Idioma:</b> {{ $livro->idioma() }}</td>
+          <td colspan="2"> <b>Idioma:</b> {{ $livro->getIdioma->idioma }}</td>
         </tr>
         <tr>
-          <td colspan="2"> <b>Categoria:</b> {{ $livro->categoria }}</td>
+          <td colspan="2"> <b>Categoria:</b> {{ $livro->getCategoria != null ? $livro->getCategoria->categoria : 'Não Informado.' }}</td>
         </tr>
         <tr>
           <td colspan="2"></td>
@@ -40,4 +38,4 @@
   </div>
 </div>
 
-endsection
+@endsection

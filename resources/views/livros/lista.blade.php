@@ -26,7 +26,7 @@
         <td>{{ $livro->ano }}</td>
         <td class="text-center">
           <a href="{{route('livros.edicao',$livro)}}" class=" btn btn-primary" title="editar" >Editar</a>
-          <a href="{{route('livros.visualizar')}}" class=" btn btn-info" title="visualizar" >Visualizar</a>
+          <a href="{{route('livros.visualizar', $livro)}}" class=" btn btn-info" title="visualizar" >Visualizar</a>
           <button data-href="{{ route('livros.excluir', $livro->id) }}" class=" btn btn-danger excluir" title="excluir">Excluir</button>
         </td>
       </tr>

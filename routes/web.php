@@ -49,4 +49,4 @@ Route::post('/livros/cadastrar', 'LivroController@cadastrar')->name('livros.cada
 Route::get('/livros/edicao/{livro}', 'LivroController@edicao')->name('livros.edicao');
 Route::post('/livros/editar/{livro}', 'LivroController@editar')->name('livros.editar');
 Route::get('/livros/excluir/{id}', 'LivroController@excluir')->name('livros.excluir');
-Route::get('/livros/visualizar', 'LivroController@visualizar')->name('livros.visualizar');
+Route::get('/livros/visualizar/{livro}', 'LivroController@visualizar')->name('livros.visualizar');

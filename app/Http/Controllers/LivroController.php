@@ -47,13 +47,10 @@ class LivroController extends Controller
     $request->validate([
       'nome_livro' => 'required',
       'edicao' => 'required',
-      'ano' => 'required|numeric|min:4',
+      'ano' => 'required|min:4',
       'autor' => 'required|min:2',
       'editora' => 'required|min:2',
     ]);
-
-  //instancia um novo objeto do tipo livro passando como parametros todos os campos via request
-   $livro = New Livro($request->all());
 
    //se salvar redireciona para a tela de lista de livros junto com a mensagem de sucesso
    if ($livro->save()) {
@@ -97,9 +94,9 @@ class LivroController extends Controller
     $request->validate([
       'nome_livro' => 'required',
       'autor' => 'required|min:2',
-      'editor' => 'required|min:2',
-      'ano' => 'required',
-      'edicao' => 'riquired',
+      'editora' => 'required|min:2',
+      'ano' => 'required|min:4',
+      'edicao' => 'required',
     ]);
 
       //se editar retorna para a tela de lista junto com a mensagem de sucesso.
