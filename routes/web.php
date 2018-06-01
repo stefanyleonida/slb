@@ -45,4 +45,8 @@ Route::get('/bibliotecas/altera_status/{biblioteca}','BibliotecaController@alter
 // Rotas de livros
 Route::get('/livros/lista', 'LivroController@listar')->name('livros.listar');
 Route::get('/livros/cadastro', 'LivroController@cadastro')->name('livros.cadastro');
-Route::get('/livros/editar', 'LivroController@edicao')->name('livros.edicao');
+Route::post('/livros/cadastrar', 'LivroController@cadastrar')->name('livros.cadastrar');
+Route::get('/livros/edicao/{livro}', 'LivroController@edicao')->name('livros.edicao');
+Route::post('/livros/editar/{livro}', 'LivroController@editar')->name('livros.editar');
+Route::get('/livros/excluir/{id}', 'LivroController@excluir')->name('livros.excluir');
+Route::get('/livros/visualizar', 'LivroController@visualizar')->name('livros.visualizar');

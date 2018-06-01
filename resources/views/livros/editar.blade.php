@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'EDIÇÃO DE CADASTRO LIVROS')
+@section('title', 'EDIÇÃO DE CADASTRO LIVRO')
 
 @section('content')
-<div class="col-md-6 " style="margin-left: 10%;">
+<div class="col-md-7 " style="margin-left: 10%;">
   <div class="card shadow">
-    <div class="card-header bg-info">Editar Livro</div>
+    <div class="card-header bg-primary text-light">Editar Livro</div>
     <div class="card-body">
-      <form class="" action="" method="post">
+      <form class="" action="{{ route('livros.editar', $livro) }}" method="post">
         @include('livros.form')
       </form>
     </div>

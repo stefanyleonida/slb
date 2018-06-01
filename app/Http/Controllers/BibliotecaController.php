@@ -15,6 +15,7 @@ class BibliotecaController extends Controller
       //carrega a lista de bibiliotecas
       $bibliotecas = Biblioteca::all();
 
+      //redireciona para tela
       return view('bibliotecas.lista', [
         'lista_bibliotecas' => $bibliotecas,
       ]);

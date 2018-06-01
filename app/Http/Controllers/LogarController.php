@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
+use App\Models\Biblioteca;
+
+
+//arquivo direcionar o usuário para página após logar no sistema é validação de email
 
 class LogarController extends Controller
 {
@@ -48,13 +53,13 @@ class LogarController extends Controller
       // se for do tipo bibliotecário
       if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'id_tipo_usuario' => 2])){
 
-        Auth::logout();
+        $usuario = User::where('email', $request->email)
+        ->first();
+
+        $biblioteca = Biblioteca::findOrfail($usuario->id_biblioteca);
+
         return redirect()
-        ->back()
-        ->with('alerta', [
-          'tipo' => 'info',
-          'texto' => 'Ainda não está pronto.',
-        ]);
+        ->route('bibliotecas.visualizar', $biblioteca);
       }
     }
 }

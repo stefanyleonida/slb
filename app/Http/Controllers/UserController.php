@@ -90,12 +90,14 @@ class UserController extends Controller
         'id_biblioteca' => $request->id_biblioteca,
       ]);
 
+      // dados para enviar por email
       $dados_usuario = [
         'nome' => $usuario->name,
         'login' => $usuario->email,
         'senha' => $senha,
       ];
 
+      // funçao que envia o email
       Mail::to($usuario->email)
       ->send(new UsuarioCriado($dados_usuario));
 

@@ -15,7 +15,7 @@ class Biblioteca extends Model
     //define os nomes das colunas que serão adicionadas ou editadas nos métodos save() e update()
     protected $fillable = ['nome_biblioteca','endereco','cep','telefone','instituicao','id_cidade', 'status'];
 
-    //busca cidade relacionada a biblioteca relacionamento de 1 para 1
+
     public function cidade()
     {
 
