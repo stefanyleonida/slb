@@ -96,8 +96,11 @@
                     @elseif(Auth::user()->id_tipo_usuario == 2)
                     <a href="{{ route('bibliotecas.visualizar', Auth::user()->id_biblioteca) }}" class="btn btn-info btn-block">Biblioteca</a>
                     <a href="{{ route('livros.listar') }}" class="btn btn-info btn-block">Livros</a>
+                    <!-- se gestor -->
+                    @elseif(Auth::user()->id_tipo_usuario == 3)
+                    <a href="{{ route('bibliotecas.visualizar', Auth::user()->id_biblioteca) }}" class="btn btn-info btn-block">Biblioteca</a>
+                    <a href="{{ route('livros.listar') }}" class="btn btn-info btn-block">Livros</a>
                     <a href="{{ route('usuarios.listar') }}" class="btn btn-info btn-block">Usuários</a>
-
                     @endif
                   </div>
                 </div>

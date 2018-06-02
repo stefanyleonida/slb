@@ -31,7 +31,9 @@
         </tr>
       </table>
       <div class="text-center">
-        <a href="{{ route('bibliotecas.edicao', $biblioteca) }}" class="btn btn-primary btn-sm">Editar</a>
+        @if(Auth::user()->id_tipo_usuario != 2)
+          <a href="{{ route('bibliotecas.edicao', $biblioteca) }}" class="btn btn-primary btn-sm">Editar</a>
+        @endif        
         <button type="button" class="btn btn-info btn-sm voltar">Voltar</button>
       </div>
   </div>

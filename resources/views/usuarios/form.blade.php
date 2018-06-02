@@ -1,29 +1,40 @@
 @csrf
 
-<div class="form-group row">
-  <label class="col-md-3 text-md-right" for="biblioteca">Biblioteca:</label>
-  <div class="col-md-8">
-    <select class="form-control" name="id_biblioteca" id="biblioteca" required {{ Auth::user()->id_tipo_usuario == 2 ? 'disabled' : 'autofocus' }}>
-      <option value="">Selecione a Biblioteca</option>
-      @if(isset($bibliotecas))
-        @foreach($bibliotecas as $biblioteca)
-          <option value="{{ $biblioteca->id_biblioteca }}" {{ (old('id_biblioteca') == $biblioteca->id_biblioteca) || (isset($usuario) && $usuario->id_biblioteca == $biblioteca->id_biblioteca) ? 'selected' : '' }}>
-            {{ $biblioteca->nome_biblioteca }}</option>
-        @endforeach
-      @endif
-    </select>
+@if(Auth::user()->id_tipo_usuario == 1)
+  <div class="form-group row">
+    <label class="col-md-3 text-md-right" for="biblioteca">Biblioteca:</label>
+    <div class="col-md-8">
+      <select class="form-control" name="id_biblioteca" id="biblioteca" required {{ Auth::user()->id_tipo_usuario == 2 ? 'disabled' : 'autofocus' }}>
+        <option value="">Selecione a Biblioteca</option>
+        @if(isset($bibliotecas))
+          @foreach($bibliotecas as $biblioteca)
+            <option value="{{ $biblioteca->id_biblioteca }}" {{ (old('id_biblioteca') == $biblioteca->id_biblioteca) || (isset($usuario) && $usuario->id_biblioteca == $biblioteca->id_biblioteca) ? 'selected' : '' }}>
+              {{ $biblioteca->nome_biblioteca }}</option>
+          @endforeach
+        @endif
+      </select>
+    </div>
   </div>
-</div>
+@else
+<input type="hidden" name="id_biblioteca" value="{{ Auth::user()->id_biblioteca }}">
+@endif
 
 <div class="col-md-12">
   <label class="col-md-3">Tipo de Usuário:</label>
   <label class="radio-inline"> <input type="radio" name="id_tipo_usuario" value="2" checked {{ Auth::user()->id_tipo_usuario == 2 ? 'disabled' : '' }}>
     Bibliotecário
   </label> &nbsp;
+  @if(Auth::user()->id_tipo_usuario == 1)
   <label class="radio-inline"> <input type="radio" name="id_tipo_usuario" value="1"
     {{ (old('id_tipo_usuario') == 1) || (isset($usuario) && $usuario->id_tipo_usuario == 1) ? 'checked' : '' }}
-    {{ Auth::user()->id_tipo_usuario == 2 ? 'disabled' : '' }}> 
+    {{ Auth::user()->id_tipo_usuario == 2 ? 'disabled' : '' }}>
     Administrador
+  </label>&nbsp;
+  @endif
+  <label class="radio-inline"> <input type="radio" name="id_tipo_usuario" value="3"
+    {{ (old('id_tipo_usuario') == 3) || (isset($usuario) && $usuario->id_tipo_usuario == 3) ? 'checked' : '' }}
+    {{ Auth::user()->id_tipo_usuario == 2 ? 'disabled' : '' }}>
+    Gestor
   </label>
 </div>
 
@@ -58,6 +69,6 @@
 </div>
 
 <div class="text-center">
-  <button class="btn btn-primary btn-sm carregando" type="submit" id="btn_salvar">Salvar</button>
+  <button class="btn btn-primary btn-sm" type="submit" id="btn_salvar">Salvar</button>
   <button class="btn btn-info btn-sm voltar" type="button">Voltar</button>
 </div>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cidade;
 use App\Models\Biblioteca;
 use App\User;
+use Auth;
 
 class BibliotecaController extends Controller
 {
@@ -87,12 +88,23 @@ class BibliotecaController extends Controller
 
       //se editar retorna para a tela de lista junto com a mensagem de sucesso.
       if($biblioteca->update($request->all())){
-        return redirect()
-        ->route('bibliotecas.listar')
-        ->with('alerta',[
-          'tipo' => 'success',
-          'texto' => 'Cadastro alterado com sucesso'
-        ]);
+        if(Auth::user()->id_tipo_usuario == 1){
+          return redirect()
+          ->route('bibliotecas.listar')
+          ->with('alerta',[
+            'tipo' => 'success',
+            'texto' => 'Cadastro alterado com sucesso'
+          ]);
+        }
+        else{
+          return redirect()
+          ->route('bibliotecas.visualizar', Auth::user()->id_biblioteca)
+          ->with('alerta',[
+            'tipo' => 'success',
+            'texto' => 'Cadastro alterado com sucesso'
+          ]);
+        }
+
       }
     }
 

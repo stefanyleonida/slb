@@ -51,7 +51,7 @@ class LogarController extends Controller
       }
 
       // se for do tipo bibliotecário
-      if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'id_tipo_usuario' => 2])){
+      if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'id_tipo_usuario' => 2 ])){
 
         $usuario = User::where('email', $request->email)
         ->first();
@@ -59,5 +59,14 @@ class LogarController extends Controller
         return redirect()
         ->route('livros.listar');
       }
+      // se for do tipo Gestor
+      if(Auth::attempt(['email' => $request->email, 'password' => $request->password, 'id_tipo_usuario' => 3 ])){
+
+        $usuario = User::where('email', $request->email)
+        ->first();
+
+        return redirect()
+        ->route('usuarios.listar');
+      }
     }
-}
+  }
