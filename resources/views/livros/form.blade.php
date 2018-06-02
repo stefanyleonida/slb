@@ -1,10 +1,34 @@
 @csrf
 
+@if(Auth::user()->id_tipo_usuario == 1)
+<div class="form-group row">
+  <label class="col-md-3 text-md-right" for="id_biblioteca">Biblioteca:</label>
+  <div class="col-md-9">
+    <select class="form-control" name="id_biblioteca" id="id_biblioteca" required>
+      <option value="">Selecione</option>
+      @if(isset($bibliotecas))
+        @foreach($bibliotecas as $biblioteca)
+          <option value="{{ $biblioteca->id_biblioteca }}"
+            {{ (old('id_biblioteca') == $biblioteca->id_biblioteca) || (isset($livro) && $livro->id_biblioteca == $biblioteca->id_biblioteca) ? 'selected' : '' }}>
+            {{ $biblioteca->nome_biblioteca }}
+          </option>
+        @endforeach
+      @endif
+    </select>
+    @if($errors->has('id_biblioteca'))
+      <span class="text-danger font-weight-bold"> {{ $errors->first('id_biblioteca') }} </span>
+    @endif
+  </div>
+</div>
+@else
+<input type="hidden" name="id_biblioteca" value="{{ Auth::user()->id_biblioteca }}">
+@endif
+
 <div class="form-group row">
   <label class="col-md-3 text-md-right" for="nome_livro">Título:</label>
   <div class="col-md-9">
     <input type="text" class="form-control" name="nome_livro" id="nome_livro" placeholder="Título do Livro" maxlength="200"
-    value="{{ old('nome_livro', isset($livro) ? $livro->nome_livro : '') }}" required autofocus>
+    value="{{ old('nome_livro', isset($livro) ? $livro->nome_livro : '') }}" required>
     @if($errors->has('nome_livro'))
       <span class="text-danger font-weight-bold"> {{ $errors->first('nome_livro') }} </span>
     @endif
@@ -87,11 +111,11 @@
 <div class="form-group row">
   <label class="col-md-3 text-md-right" for="categoria">Categoria:</label>
   <div class="col-md-6">
-    <select class="form-control" name="categoria" id="categoria">
+    <select class="form-control" name="id_categoria" id="categoria">
       <option value="">Selecione</option>
       @foreach($categorias as $categoria)
         <option value="{{ $categoria->id_categoria }}"
-          {{ (old('categoria') ==  $categoria->id_categoria) || (isset($livro) && $livro->id_categoria == $categoria->id_categoria) ? 'selected' : ''}}>
+          {{ (old('id_categoria') ==  $categoria->id_categoria) || (isset($livro) && $livro->id_categoria == $categoria->id_categoria) ? 'selected' : ''}}>
           {{ $categoria->categoria }}
         </option>
       @endforeach
@@ -103,7 +127,6 @@
 </div>
 
 <input type="hidden" name="id_user" value="{{ Auth::user()->id }}">
-<input type="hidden" name="id_biblioteca" value="{{ Auth::user()->id_biblioteca }}">
 
 <div class="text-center">
   <button class="btn btn-primary btn-sm" type="submit" id="btn_salvar">Salvar</button>
