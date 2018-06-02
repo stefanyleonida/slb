@@ -15,8 +15,10 @@ class PesquisaController extends Controller
       $busca = $request->busca;
 
       if($busca != null){
-        $livros = Livro::where('livros.nome_livro', 'like', '%'.$busca.'%')
+        $livros = Livro::join('bibliotecas', 'bibliotecas.id_biblioteca', 'livros.id_biblioteca')
+        ->where('livros.nome_livro', 'like', '%'.$busca.'%')
         ->orWhere('livros.autor', 'like', '%'.$busca.'%')
+        ->orWhere('bibliotecas.nome_biblioteca', 'like', '%'.$busca.'%')
         ->get();
       }
 
