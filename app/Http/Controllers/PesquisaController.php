@@ -22,6 +22,7 @@ class PesquisaController extends Controller
 
       return view('pesquisa.resultado', [
         'livros' => $livros,
+        'busca' => $busca,
       ]);
     }
 }

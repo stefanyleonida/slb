@@ -20,7 +20,8 @@ class LivroController extends Controller
     //carrregar a lista de livros
     $livros = Livro::all();
 
-    if(Auth::user()->id_tipo_usuario == 2){
+    //se usuario logado não for admin, traz os livros da sua biblioteca
+    if(Auth::user()->id_tipo_usuario == 2 ){
       $livros = Livro::where('id_biblioteca', Auth::user()->id_biblioteca)
       ->get();
     }

@@ -50,8 +50,13 @@ class UserController extends Controller
     public function listar()
     {
 
-      $usuarios = User::orderBy('name')
-      ->get();
+      $usuarios = User::all();
+
+      //se usuário logado não for Administrador carraga os usuários da biblioteca
+      if(Auth::user()->id_tipo_usuario <> 1){
+        $usuarios = User::where('id_biblioteca', Auth::user()->id_biblioteca)
+        ->get();
+      }
 
       return view('usuarios.listar', [
         'usuarios' => $usuarios

@@ -13,7 +13,8 @@ class TipoDeUsuarioSeeder extends Seeder
     {
         $tipo_de_usurios = [
           ['tipo_usuario' => 'Administrador'],
-          ['tipo_usuario' => 'Bibliotecário']
+          ['tipo_usuario' => 'Bibliotecário'],
+          ['tipo_usuario' => 'Gestor'],
         ];
 
         DB::table('tipo_de_usuarios')->insert($tipo_de_usurios);

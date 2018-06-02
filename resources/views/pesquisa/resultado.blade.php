@@ -9,7 +9,7 @@
     <form class="form-inline" type="post" action="{{ route('pesquisar') }}" id="form_buscar">
         @csrf
         <img src="{{ asset('img/logo_slb2.jpg') }}" alt="" width="20%">
-        <input class="form-control" type="text" name="busca" id="busca" max-lenght="100" style="width: 70%;">
+        <input class="form-control" type="text" name="busca" id="busca" max-lenght="100" style="width: 70%;" value="{{ isset($busca) ? $busca : '' }}">
         <button type="submit" class="btn btn-info" style="margin-left: 15px;">
           <img src="{{ asset('img/search-icon-hi.png') }}" alt="" width="25px" height="25px">
         </button>

@@ -6,7 +6,7 @@
 <div class="row">
   <a href="{{route('livros.cadastro')}}" class="btn btn-primary">Cadastrar Livro</a>
 </div>
-<div class="col-md-12">
+<div class="col-md-12 text-center">
   <h4 class="" style="margin-top: 50px">Lista de Livros</h4>
 </div>
   <div class="row" style="margin-top: 10px;">
