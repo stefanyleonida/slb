@@ -63,6 +63,41 @@ class UserController extends Controller
       ]);
     }
 
+    // função que valida número do cpf
+    public function valida_numero_cpf($cpf)
+    {
+      $valido = true;
+      $cpf_limpo = str_replace(['.', '-'],'', $cpf);
+
+      if(strlen($cpf_limpo) != 11 ||
+      $cpf_limpo == '00000000000' ||
+      $cpf_limpo == '11111111111' ||
+      $cpf_limpo == '22222222222' ||
+      $cpf_limpo == '33333333333' ||
+      $cpf_limpo == '44444444444' ||
+      $cpf_limpo == '55555555555' ||
+      $cpf_limpo == '66666666666' ||
+      $cpf_limpo == '77777777777' ||
+      $cpf_limpo == '88888888888' ||
+      $cpf_limpo == '99999999999'){
+        $valido = false;
+      }
+
+      for ($t = 9; $t < 11; $t++) {
+
+        for ($d = 0, $c = 0; $c < $t; $c++) {
+          $d += $cpf_limpo{$c} * (($t + 1) - $c);
+        }
+        $d = ((10 * $d) % 11) % 10;
+        if ($cpf_limpo{$c} != $d) {
+          $valido =  false;
+        }
+      }
+
+      return $valido;
+
+    }
+
     // retorna tela de cadastro
     public function cadastro()
     {
@@ -83,6 +118,17 @@ class UserController extends Controller
         'email' => 'required|email|unique:users',
         'cpf' => 'required|min:14|unique:users',
       ]);
+
+      // valida o número do cpf
+      if($this->valida_numero_cpf($request->cpf) == false){
+        return redirect()
+        ->back()
+        ->withInput()
+        ->with('alerta', [
+          'tipo' => 'info',
+          'texto' => 'CPF inválido'
+        ]);
+      }
 
       $senha = str_random(8);
 
@@ -128,6 +174,7 @@ class UserController extends Controller
 
   }
 
+    // esta validação verifica se já existe outro usuário com o cpf
     public function validaCpf(int $id, string $cpf)
     {
 
@@ -138,6 +185,7 @@ class UserController extends Controller
 
     }
 
+    //esta função valida se existe outro usuário com este email
     public function validaEmail(int $id, string $email)
     {
 
@@ -150,6 +198,16 @@ class UserController extends Controller
 
     public function editar(Request $request, User $usuario)
     {
+      // valida o número do cpf
+      if($this->valida_numero_cpf($request->cpf) == false){
+        return redirect()
+        ->back()
+        ->withInput()
+        ->with('alerta', [
+          'tipo' => 'info',
+          'texto' => 'CPF inválido'
+        ]);
+      }
 
       if($this->validaCpf($usuario->id, $request->cpf)){
         return redirect()

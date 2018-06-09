@@ -31,10 +31,10 @@
         </tr>
       </table>
       <div class="text-center">
+        <button type="button" class="btn btn-info btn-sm voltar">Voltar</button>
         @if(Auth::user()->id_tipo_usuario != 2)
           <a href="{{ route('bibliotecas.edicao', $biblioteca) }}" class="btn btn-primary btn-sm">Editar</a>
-        @endif        
-        <button type="button" class="btn btn-info btn-sm voltar">Voltar</button>
+        @endif            
       </div>
   </div>
 </div>

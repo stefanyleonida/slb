@@ -21,17 +21,11 @@ class CreateLivrosTable extends Migration
             $table->string('edicao');
             $table->year('ano');
             $table->string('editora');
-            $table->integer('id_categoria')->nullable();
             $table->integer('id_biblioteca');
             $table->integer('id_idioma')->nullable();
             $table->integer('id_user');
             $table->timestamps();
 
-            // relacionamentos
-            $table->foreign('id_categoria')->references('id_categoria')->on('categorias');
-            $table->foreign('id_biblioteca')->references('id_biblioteca')->on('bibliotecas');
-            $table->foreign('id_idioma')->references('id_idioma')->on('idiomas');
-            $table->foreign('id_user')->references('id')->on('users');
         });
     }
 

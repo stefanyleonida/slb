@@ -39,8 +39,8 @@
       </table>
 
       <div class="text-center">
-        <a href="{{ route('livros.edicao', $livro) }}" class="btn btn-primary btn-sm">Editar</a>
         <button type="button" class="btn btn-info btn-sm voltar">Voltar</button>
+        <a href="{{ route('livros.edicao', $livro) }}" class="btn btn-primary btn-sm">Editar</a>
       </div>
   </div>
 </div>

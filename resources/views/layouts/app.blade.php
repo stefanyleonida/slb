@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
-        <title>SISBV - @yield('title')</title>
+        <title>SLB - @yield('title')</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,6 +16,7 @@
         <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
         <script src="{{ asset('js/datatables.min.js') }}"></script>
         <script src="{{ asset('js/global.js') }}"></script>
+        <script src="{{ asset('js/validacao_cpf.js') }}"></script>
     </head>
     <body>
 

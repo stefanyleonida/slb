@@ -62,6 +62,6 @@
   </div>
 </div>
 <div class="text-center">
-  <button class="btn btn-primary btn-sm" type="submit" id="btn_salvar">Salvar</button>
   <button class="btn btn-info btn-sm voltar" type="button">Voltar</button>
+  <button class="btn btn-primary btn-sm" type="submit" id="btn_salvar">Salvar</button>
 </div>

@@ -22,10 +22,7 @@ class CreateBibliotecasTable extends Migration
             $table->string('instituicao',250)->nullable();
             $table->integer('status')->default(1); //valor padrão ativo
             $table->timestamps();
-            // relacionamento da tabela cidades
-            $table->integer('id_cidade');
-            $table->foreign('id_cidade')
-            ->references('id_cidade')->on('cidades');
+            
         });
     }
 

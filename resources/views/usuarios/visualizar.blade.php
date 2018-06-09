@@ -23,8 +23,8 @@
         </tr>
       </table>
       <div class="text-center">
-        <a href="{{ route('usuarios.edicao', $usuario) }}" class="btn btn-primary btn-sm">Editar</a>
         <button type="button" class="btn btn-info btn-sm voltar">Voltar</button>
+        <a href="{{ route('usuarios.edicao', $usuario) }}" class="btn btn-primary btn-sm">Editar</a>
       </div>
   </div>
 </div>

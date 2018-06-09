@@ -19,18 +19,22 @@
         <th>Nome</th>
         <th>CPF</th>
         <th>Tipo Usuário</th>
+        @if(Auth::user()->id_tipo_usuario == 1)
         <th>Biblioteca</th>
+        @endif
         <th>Status</th>
         <th class="text-center">Ações</th>
       </tr>
-    </thead>
+      </thead>
     <tbody>
       @foreach($usuarios as $usuario)
       <tr>
         <td>{{ $usuario->name }}</td>
         <td>{{ $usuario->cpf }}</td>
         <td>{{ $usuario->getTipo->tipo_usuario }}</td>
+        @if(Auth::user()->id_tipo_usuario == 1)
         <td>{{ $usuario->biblioteca->nome_biblioteca }}</td>
+        @endif
         <td>{{ $usuario->status() }}</td>
         <td class="text-center">
           <a class="btn btn-primary btn-sm" href="{{route('usuarios.edicao', $usuario)}}">Editar</a>
