@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Livro extends Model
 {
@@ -30,6 +31,11 @@ class Livro extends Model
     public function getBiblioteca()
     {
       return $this->hasOne(Biblioteca::class, 'id_biblioteca', 'id_biblioteca');
+    }
+
+    public function getUsuarioCadastro()
+    {
+      return $this->hasOne(User::class, 'id', 'id_user');
     }
 
 }

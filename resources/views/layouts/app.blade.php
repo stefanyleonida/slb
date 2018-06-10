@@ -91,7 +91,7 @@
                     <a href="{{ route('bibliotecas.listar') }}" class="btn btn-info btn-block">Bibliotecas</a>
                     <a href="{{ route('livros.listar') }}" class="btn btn-info btn-block">Livros</a>
                     <a href="{{ route('usuarios.listar') }}" class="btn btn-info btn-block">Usuários</a>
-                    <a href="#" class="btn btn-info btn-block">Reltórios</a>
+                    <a href="{{ route('relatorio') }}" class="btn btn-info btn-block">Relatório</a>
 
                     <!-- se bibliotecário -->
                     @elseif(Auth::user()->id_tipo_usuario == 2)

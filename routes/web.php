@@ -53,3 +53,6 @@ Route::get('/livros/visualizar/{livro}', 'LivroController@visualizar')->name('li
 
 //Rotas de Pesquisa
 Route::get('/pesquisa', 'PesquisaController@pesquisar')->name('pesquisar');
+
+//rota do relatório
+Route::get('/relatorio', 'RelatorioController@relatorio')->name('relatorio');

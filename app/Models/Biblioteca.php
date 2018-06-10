@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class Biblioteca extends Model
 {
@@ -30,5 +31,15 @@ class Biblioteca extends Model
         $status = "Ativo";
       }
       return $status;
+    }
+
+    public function getUsuarios()
+    {
+      return $this->hasMany(User::class, 'id_biblioteca', 'id_biblioteca');
+    }
+
+    public function getLivros()
+    {
+      return $this->hasMany(Livro::class, 'id_biblioteca', 'id_biblioteca');
     }
 }
