@@ -13,12 +13,12 @@ class AddFkBibliotecas extends Migration
      */
     public function up()
     {
-        Schema::table('bibliotecas', function(Blueprint $table){
-          // relacionamento da tabela cidades
-          $table->integer('id_cidade');
-          $table->foreign('id_cidade')
-          ->references('id_cidade')->on('cidades');
-        });
+      Schema::table('bibliotecas', function(Blueprint $table){
+        // relacionamento da tabela cidades
+        $table->integer('id_cidade')->unsigned();
+        $table->foreign('id_cidade')
+        ->references('id_cidade')->on('cidades');
+      });
     }
 
     /**

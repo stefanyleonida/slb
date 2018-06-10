@@ -21,9 +21,10 @@ class CreateLivrosTable extends Migration
             $table->string('edicao');
             $table->year('ano');
             $table->string('editora');
-            $table->integer('id_biblioteca');
-            $table->integer('id_idioma')->nullable();
-            $table->integer('id_user');
+            $table->integer('id_categoria')->unsigned();
+            $table->integer('id_biblioteca')->unsigned();
+            $table->integer('id_idioma')->unsigned()->nullable();
+            $table->integer('id_user')->unsigned();
             $table->timestamps();
 
         });

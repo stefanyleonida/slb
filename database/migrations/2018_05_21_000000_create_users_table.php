@@ -19,12 +19,19 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('cpf')->unique();
             $table->string('password');
-            $table->integer('id_tipo_usuario');
-            $table->integer('id_biblioteca');
+            $table->integer('id_tipo_usuario')->unsigned();
+            $table->integer('id_biblioteca')->unsigned();
             $table->integer('status')->unsigned()->default(1);
             $table->rememberToken();
             $table->timestamps(); //coluna com data de cadastro e última alteração do cadastro
-          
+
+        });
+
+        Schema::table('users', function(Blueprint $table){
+          // relacionamento com tipo usuário
+          $table->foreign('id_tipo_usuario')->references('id_tipo_usuario')->on('tipo_de_usuarios');
+          // relacionamento com biblioteca
+          $table->foreign('id_biblioteca')->references('id_biblioteca')->on('bibliotecas');
         });
     }
 
