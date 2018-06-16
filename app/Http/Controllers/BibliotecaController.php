@@ -22,6 +22,20 @@ class BibliotecaController extends Controller
       ]);
     }
 
+    //evita duplicidade de cadastro e edição de bibliotecas
+    public function naoDuplicarBiblioteca($id = null, $nome, $cep)
+    {
+
+      $sql = Biblioteca::where('nome_biblioteca', $nome)
+      ->where('cep', $cep);
+
+      if($id != null){
+        $sql->where('id_biblioteca', '<>', $id);
+      }
+
+      return $sql->count();
+    }
+
     //chama a tela de cadastro
      public function cadastro()
     {
@@ -37,6 +51,18 @@ class BibliotecaController extends Controller
     // função de Cadastrar no banco
     public function cadastrar(Request $request)
     {
+      //valida duplicidade da biblioteca
+      if($this->naoDuplicarBiblioteca(null, $request->nome_biblioteca, $request->cep)){
+        return redirect()
+        ->back()
+        ->withInput()
+        ->with('alerta', [
+          'tipo' => 'info',
+          'texto' => 'Biblioteca já cadastrada!',
+        ]);
+
+      }
+
       //faz a validação dos campos do formulário
       $request->validate([
         'nome_biblioteca' => 'required|min:3',
@@ -76,7 +102,16 @@ class BibliotecaController extends Controller
     //função de editar no banco de dados
     public function editar(Request $request, Biblioteca $biblioteca)
     {
-
+      //valida duplicidade da biblioteca
+      if($this->naoDuplicarBiblioteca($biblioteca->id_biblioteca, $request->nome_biblioteca, $request->cep)){
+        return redirect()
+        ->back()
+        ->withInput()
+        ->with('alerta', [
+          'tipo' => 'info',
+          'texto' => 'Biblioteca já cadastrada!',
+        ]);
+      }
       // valida os campos indicados
       $request->validate([
         'nome_biblioteca' => 'required|min:3',

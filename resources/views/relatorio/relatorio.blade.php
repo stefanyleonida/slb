@@ -110,8 +110,8 @@
         </tr>
         <tr>
           <td> <b>Ano:</b> {{ $livro->ano }} </td>
-          <td> <b>Idioma:</b> {{ $livro->getIdioma->idioma }} </td>
-          <td> <b>Categoria:</b> {{ $livro->getCategoria->categoria }} </td>
+          <td> <b>Idioma:</b> {{ isset($livro->getIdioma->idioma) ? $livro->getIdioma->idioma : 'Não informado'}} </td>
+          <td> <b>Categoria:</b> {{ isset($livro->getCategoria->categoria) ?  $livro->getCategoria->categoria : 'Não informado' }} </td>
         </tr>
         <tr>
           <td colspan="2"> <b>Autor:</b> {{ $livro->autor }} </td>

@@ -93,7 +93,7 @@
 <div class="form-group row">
   <label class="col-md-3 text-md-right" for="id_idioma">Idioma:</label>
   <div class="col-md-6">
-    <select class="form-control" name="id_idioma" id="id_idioma">
+    <select class="form-control" name="id_idioma" id="id_idioma" required>
       <option value="">Selecione</option>
       @foreach($idiomas as $idioma)
         <option value="{{ $idioma->id_idioma }}"
@@ -111,7 +111,7 @@
 <div class="form-group row">
   <label class="col-md-3 text-md-right" for="categoria">Categoria:</label>
   <div class="col-md-6">
-    <select class="form-control" name="id_categoria" id="categoria">
+    <select class="form-control" name="id_categoria" id="categoria" required>
       <option value="">Selecione</option>
       @foreach($categorias as $categoria)
         <option value="{{ $categoria->id_categoria }}"

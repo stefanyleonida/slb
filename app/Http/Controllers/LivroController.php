@@ -62,6 +62,8 @@ class LivroController extends Controller
       'ano' => 'required|min:4',
       'autor' => 'required|min:2',
       'editora' => 'required|min:2',
+      'id_idioma' => 'required',
+      'id_categoria' => 'required',
     ]);
 
     $livro = new Livro($request->all());
@@ -111,6 +113,8 @@ class LivroController extends Controller
       'editora' => 'required|min:2',
       'ano' => 'required|min:4',
       'edicao' => 'required',
+      'id_idioma' => 'required',
+      'id_categoria' => 'required',
     ]);
 
     //se editar retorna para a tela de lista junto com a mensagem de sucesso.
