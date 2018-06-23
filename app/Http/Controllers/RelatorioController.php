@@ -10,7 +10,8 @@ use Illuminate\Http\Request;
 
 class RelatorioController extends Controller
 {
-    public function relatorio(Request $request)
+
+    public function gerarRelatorio(Request $request)
     {
 
       $filtro_biblioteca = $request->filtro_biblioteca;
@@ -42,7 +43,7 @@ class RelatorioController extends Controller
         $qtd_biblio->where('id_biblioteca', $filtro_biblioteca);
       }
 
-      return view('relatorio.relatorio', [
+      return [
         'bibliotecas' => $bibliotecas,
         'select_bibliotecas' => $select_bibliotecas,
         'qtd_bibliotecas' => $bibliotecas->count(),
@@ -50,6 +51,13 @@ class RelatorioController extends Controller
         'qtd_adm' => $qtd_adm->count(),
         'qtd_gestor' => $qtd_gestor->count(),
         'qtd_biblio' => $qtd_biblio->count(),
-      ]);
+      ];
+
+    }
+
+    public function relatorio(Request $request)
+    {      
+
+      return view('relatorio.relatorio', $this->gerarRelatorio($request));
     }
 }

@@ -16,7 +16,6 @@
         <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
         <script src="{{ asset('js/datatables.min.js') }}"></script>
         <script src="{{ asset('js/global.js') }}"></script>
-        <script src="{{ asset('js/validacao_cpf.js') }}"></script>
     </head>
     <body>
 
