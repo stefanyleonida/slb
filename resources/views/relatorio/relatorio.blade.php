@@ -40,6 +40,13 @@
     </form>
   </div>
 
+  <div class="text-center">
+    <form class="" action="{{ route('relatorio_pdf') }}" method="get">
+      <input type="hidden" name="filtro_biblioteca" value="{{ $f_biblioteca }}">
+      <button type="submit" class="btn btn-primary">PDF</button>
+    </form>
+  </div>
+
   <div class="" id="resumo">
     <table class="table table-bordered table-condensed table-hover custom_table">
       <tr>

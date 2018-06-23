@@ -56,3 +56,4 @@ Route::get('/pesquisa', 'PesquisaController@pesquisar')->name('pesquisar');
 
 //rota do relatório
 Route::get('/relatorio', 'RelatorioController@relatorio')->name('relatorio');
+Route::get('/relatorio_pdf', 'RelatorioController@pdf')->name('relatorio_pdf');

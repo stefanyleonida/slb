@@ -5,13 +5,13 @@ use App\Models\Biblioteca;
 use App\Models\Livro;
 use App\User;
 use Illuminate\Support\Facades\DB;
-
+use PDF;
 use Illuminate\Http\Request;
 
 class RelatorioController extends Controller
 {
 
-    public function gerarRelatorio(Request $request)
+    private function gerarRelatorio(Request $request)
     {
 
       $filtro_biblioteca = $request->filtro_biblioteca;
@@ -51,13 +51,22 @@ class RelatorioController extends Controller
         'qtd_adm' => $qtd_adm->count(),
         'qtd_gestor' => $qtd_gestor->count(),
         'qtd_biblio' => $qtd_biblio->count(),
+        'f_biblioteca' => $filtro_biblioteca,
       ];
 
     }
 
     public function relatorio(Request $request)
-    {      
+    {
 
       return view('relatorio.relatorio', $this->gerarRelatorio($request));
+    }
+
+    public function pdf(Request $request)
+    {
+      $data = $this->gerarRelatorio($request);
+
+      $pdf = PDF::loadView('relatorio.relatorio_pdf', $data);
+      return $pdf->stream('relatorio.pdf');
     }
 }
